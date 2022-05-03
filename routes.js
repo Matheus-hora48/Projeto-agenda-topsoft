@@ -8,6 +8,7 @@ route.get('/', homeController.paginaInicial);
 
 // Rotas do cadastro
 route.get('/cadastro', cadastroController.index);
+route.post('/cadastro', cadastroController.register);
 
 
 
