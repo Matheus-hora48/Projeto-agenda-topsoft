@@ -6,9 +6,12 @@ const cadastroController = require('./src/controllers/cadastroController');
 // Rotas da home
 route.get('/', homeController.paginaInicial);
 
-// Rotas do cadastro
-route.get('/cadastro/index', cadastroController.index);
-route.post('/cadastro/register', cadastroController.register);
+// Rotas de contato
+route.get('/contato/index', contatoController.index);
+route.post('/contato/register', contatoController.register);
+route.get('/contato/index/:id', contatoController.editIndex);
+route.post('/contato/edit/:id', contatoController.edit);
+route.get('/contato/delete/:id', contatoController.delete);
 
 
 

@@ -4,7 +4,12 @@ const app = express();
 
 //serve para modelar a base de dados
 const mongoose = require('mongoose');
-mongoose.connect(process.env.CONNECTIONSTRING, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.CONNECTIONSTRING,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  })
   .then(() => {
     app.emit('pronto');
   })
@@ -26,7 +31,7 @@ const routes = require('./routes');
 const path = require('path');
 
 //proteção
-const helmet = require('helmet');
+//const helmet = require('helmet');
 
 //token para os form
 const csrf = require('csurf');
@@ -34,7 +39,7 @@ const csrf = require('csurf');
 //funções que sao executadas nas rotas no meio do caminho
 const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware');
 
-app.use(helmet());
+//app.use(helmet());
 
 //formularios para aplicação
 app.use(express.urlencoded({ extended: true }));

@@ -1,4 +1,8 @@
-<form action="/contato/register" method="POST">
+<% if(contato._id) { %>
+  <form action="/contato/edit/<%= contato._id %>" method="POST">
+  <% } else { %>
+  <form action="/contato/register" method="POST">
+  <% } %>
   <div class="form-group">
     <label>Nome completo</label>
     <input

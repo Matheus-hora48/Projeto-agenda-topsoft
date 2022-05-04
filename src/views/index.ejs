@@ -22,32 +22,24 @@
           </tr>
         </thead>
         <tbody>
-          <% contatos.forEach(contatos => { %>
-          <tr>
-            <th scope="row">1</th>
-            <td><%= contato.nome %></td>
-            <td><%= contato.telefone %></td>
-            <td><%= contato.tipo %></td>
-            <td><a href="contato/index">editar</a></td>
-            <td><a href="contato/delete" class="text-danger ">excluir</a></td>
-          </tr>
-        })%>
-          <tr>
-            <th scope="row">2</th>
-            <td>Matheus Hora</td>
-            <td>77999197482</td>
-            <td>ação</td>
-            <td><a href="">editar</a></td>
-            <td><a href="" class="text-danger ">excluir</a></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Matheus Hora</td>
-            <td>77999197482</td>
-            <td>ação</td>
-            <td><a href="">editar</a></td>
-            <td><a href="" class="text-danger ">excluir</a></td>
-          </tr>
+          <% if(contatos.length > 0) { %>
+            <div class="responsive-table">
+              <table class="table my-3">
+                <% contatos.forEach(contato => { %>
+                <tr>
+                  <td><%= contato.nome %></td>
+                  <td><%= contato.sobrenome %></td>
+                  <td><%= contato.telefone %></td>
+                  <td><%= contato.email %></td>
+                  <td><a href="/contato/index/<%= contato._id %>">Editar</a></td>
+                  <td><a class="text-danger" href="/contato/delete/<%= contato._id %>">Excluir</a></td>
+                </tr>
+                <% }); %>
+              </table>
+            </div>
+            <% } else { %>
+              <p class="text-center lead">Não existem contatos na sua agenda.</p>
+            <% } %>
         </tbody>
       </table>
 

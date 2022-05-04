@@ -1,6 +1,6 @@
-const Cadastro = require('../models/CadastrarModel')
+const Contato = require('../models/CadastrarModel');
 
-exports.paginaInicial = async (req, res) => {
-  const contatos = await Contato.buscaContato()
-  res.render('index', {contatos});
+exports.index = async(req, res) => {
+  const contatos = await Contato.buscaContatos();
+  res.render('index', { contatos });
 };
