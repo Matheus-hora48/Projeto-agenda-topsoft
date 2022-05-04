@@ -1,6 +1,7 @@
 //trabalha com os dados
 
 const mongoose = require('mongoose');
+const validator = require('validator')
 
 const CadastroSchema = new mongoose.Schema({
   nome: { type: String, required: true },
@@ -9,15 +10,26 @@ const CadastroSchema = new mongoose.Schema({
   
 });
 
-const CadastroModel = mongoose.model('Cadastro', CadastroSchema);
+const CadastrarModel = mongoose.model('Cadastro', CadastroSchema);
 
-class Cadastro (body) {
+function Cadastro(body)  {
   this.body = body
+  this.errors = []
   this.contato = null
 }
 
 Cadastro.prototype.register = async function(){
-  this.cadastro = await Cadastro.create(this.body)
+  this.valida()
+
+  if(this.errors.length > 0) return
+  this.cadastro = await CadastrarModel.create(this.body)
+}
+
+Cadastro.prototype.valida = function(){
+  this.cleanUp()
+
+  if(!this.body.nome) this.errors.push('Nome é um campo obrigatório')
+  if(!this.body.telefone) this.errors.push('Telefone é um campo obrigatório')
 }
 
 Cadastro.prototype.cleanUp = function(){
@@ -28,14 +40,12 @@ Cadastro.prototype.cleanUp = function(){
   }
 
   this.body = {
-    nome: this.body.nome
-    telefone: this.body.nome
-    tipo: this.body.nome
+    nome: this.body.nome,
+    telefone: this.body.telefone,
+    tipo: this.body.tipo,
   }
 }
 
-Cadastro.prototype.register = function(){
-  this.valida()
-}
+
 
 module.exports = Cadastro;

@@ -6,11 +6,24 @@ exports.index = (req, res) => {
 };
 
 exports.register = async (req, res) => {
+
   try{
     const cadastro = new Cadastro(req.body)
+    await cadastro.register()
+
+    if(contato.errors.length > 0) {
+      req.flash('errors' , contato.errors)
+      req.session.save(() => res.redirect('back'))
+      return
+    }
+
+    req.flash('errors' , 'Contato registrado com sucesso')
     req.session.save(() => res.redirect('back'))
-    res.send('oi')
     return
+
+  } catch(e) {
+    console.log(e)
+      return res.render('404')
   }
   
 };
