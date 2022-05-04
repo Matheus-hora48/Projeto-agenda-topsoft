@@ -22,14 +22,16 @@
           </tr>
         </thead>
         <tbody>
+          <% contatos.forEach(contatos => { %>
           <tr>
             <th scope="row">1</th>
-            <td>Matheus Hora</td>
-            <td>77999197482</td>
-            <td>ação</td>
-            <td><a href="">editar</a></td>
-            <td><a href="" class="text-danger ">excluir</a></td>
+            <td><%= contato.nome %></td>
+            <td><%= contato.telefone %></td>
+            <td><%= contato.tipo %></td>
+            <td><a href="contato/index">editar</a></td>
+            <td><a href="contato/delete" class="text-danger ">excluir</a></td>
           </tr>
+        })%>
           <tr>
             <th scope="row">2</th>
             <td>Matheus Hora</td>

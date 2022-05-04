@@ -46,6 +46,12 @@ Cadastro.prototype.cleanUp = function(){
   }
 }
 
+//
+contatos.buscaContato = async function(id){
+  const contatos = await CadastrarModel.find()
+    .sort({criadoEm: -1})
+  return contatos
+}
 
 
 module.exports = Cadastro;
