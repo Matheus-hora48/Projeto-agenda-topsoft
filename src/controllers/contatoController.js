@@ -1,4 +1,4 @@
-const Contato = require('../models/CadastrarModel');
+const Contato = require('../models/ContatoModel');
 
 exports.index = (req, res) => {
   res.render('contato', {
@@ -12,12 +12,10 @@ exports.register = async(req, res) => {
     await contato.register();
 
     if(contato.errors.length > 0) {
-      req.flash('errors', contato.errors);
       req.session.save(() => res.redirect('back'));
       return;
     }
 
-    req.flash('success', 'Contato registrado com sucesso.');
     req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
     return;
   } catch(e) {
