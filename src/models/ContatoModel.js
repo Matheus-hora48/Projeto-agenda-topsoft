@@ -3,8 +3,8 @@ const validator = require('validator');
 
 const ContatoSchema = new mongoose.Schema({
   nome: { type: String, required: true },
-  telefone: { type: String, required: false, default: '' },
-  tipo: { type: String, required: true, default: '' },
+  telefone: { type: String, required: true },
+  tipo: { type: String, required: true},
   criadoEm: { type: Date, default: Date.now },
 });
 
