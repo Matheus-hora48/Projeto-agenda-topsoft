@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const ContatoSchema = new mongoose.Schema({
   nome: { type: String, required: true },
-  telefone: { type: String, required: true},
-  tipo: { type: String, required: false},
+  telefone: { type: String, required: false, default: '' },
+  tipo: { type: String, required: true, default: '' },
   criadoEm: { type: Date, default: Date.now },
 });
 
@@ -24,7 +25,8 @@ Contato.prototype.register = async function() {
 Contato.prototype.valida = function() {
   this.cleanUp();
 
-  // Validação  
+  // Validação
+  // O e-mail precisa ser válido
   if(!this.body.nome) this.errors.push('Nome é um campo obrigatório.');
 };
 

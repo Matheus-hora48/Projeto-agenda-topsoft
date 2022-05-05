@@ -1,8 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
-//serve para modelar a base de dados
 const mongoose = require('mongoose');
 mongoose.connect(process.env.CONNECTIONSTRING,
   {
@@ -14,38 +12,19 @@ mongoose.connect(process.env.CONNECTIONSTRING,
     app.emit('pronto');
   })
   .catch(e => console.log(e));
-
-//serve para salvar um cookie no pc
 const session = require('express-session');
-
-//salvar a seções na bd 
 const MongoStore = require('connect-mongo');
-
-//mensagens autodescritrutiva
 const flash = require('connect-flash');
-
-//rotas da aplicação
 const routes = require('./routes');
-
-//caminhos
 const path = require('path');
-
-//proteção
-//const helmet = require('helmet');
-
-//token para os form
+// const helmet = require('helmet'); // helmet começou a causar problemas no localhost por conta da falta de SSL
 const csrf = require('csurf');
-
-//funções que sao executadas nas rotas no meio do caminho
 const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware');
 
-//app.use(helmet());
+// app.use(helmet()); // helmet começou a causar problemas no localhost por conta da falta de SSL
 
-//formularios para aplicação
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-//são os arquivo estaticos
 app.use(express.static(path.resolve(__dirname, 'public')));
 
 const sessionOptions = session({
@@ -61,16 +40,11 @@ const sessionOptions = session({
 app.use(sessionOptions);
 app.use(flash());
 
-//são os arquivos que renderiza na tela
 app.set('views', path.resolve(__dirname, 'src', 'views'));
-
-//tipo de engine que renderiza na tela
 app.set('view engine', 'ejs');
 
-//configurando o csrf token
 app.use(csrf());
-
-//os middlewares
+// Nossos próprios middlewares
 app.use(middlewareGlobal);
 app.use(checkCsrfError);
 app.use(csrfMiddleware);
