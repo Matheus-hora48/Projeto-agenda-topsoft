@@ -8,10 +8,10 @@ const contatoController = require('./src/controllers/contatoController');
 route.get('/', homeController.index);
 
 // Rotas de contato
-route.get('/contato/index',  contatoController.index);
-route.post('/contato/register',contatoController.register);
-route.get('/contato/index/:id', contatoController.editIndex);
-route.post('/contato/edit/:id', contatoController.edit);
-route.get('/contato/delete/:id', contatoController.delete);
+route.get('/',  contatoController.index);
+route.post('/register',contatoController.register);
+route.get('/:id', contatoController.editIndex);
+route.post('/edit/:id', contatoController.edit);
+route.get('/delete/:id', contatoController.delete);
 
 module.exports = route;
