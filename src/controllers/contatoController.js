@@ -18,7 +18,7 @@ exports.register = async(req, res) => {
     }
 
     req.flash('success', 'Contato registrado com sucesso.');
-    req.session.save(() => res.redirect(`/contato/index/${contato.contato._id}`));
+    req.session.save(() => res.redirect(`back`));
     return;
   } catch(e) {
     console.log(e);
@@ -66,3 +66,8 @@ exports.delete = async function(req, res) {
   req.session.save(() => res.redirect('back'));
   return;
 };
+
+exports.contador = async function(req, res) {
+  const contador = this.contato.length()
+  return contador
+}
